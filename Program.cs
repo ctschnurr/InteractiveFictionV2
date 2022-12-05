@@ -390,7 +390,7 @@ namespace Interactive_Fiction
                 if (System.IO.File.Exists("savegame.txt"))
                 {
                     savePage = System.IO.File.ReadAllText(@"savegame.txt");
-                    Console.WriteLine(" (L)oad Bookmark on page " + savePage);
+                    Console.WriteLine(" (L)oad Bookmark on Page " + savePage);
                 }
                 Console.WriteLine(" (R)eturn");
                 Console.WriteLine(" (Q)uit");
@@ -460,7 +460,7 @@ namespace Interactive_Fiction
                             System.IO.File.Create(@"savegame.txt").Close();
                             System.IO.File.WriteAllText(@"savegame.txt", savePage);
 
-                            Console.WriteLine(" Page " + currentPageNumber + "Bookmarked!");
+                            Console.WriteLine(" Page " + currentPageNumber + " Bookmarked!");
 
                             Console.ReadKey(true);
                             click.Play();

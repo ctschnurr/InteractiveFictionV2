@@ -16,7 +16,7 @@ namespace Interactive_Fiction
         static int currentPageNumber = 1;
         static char[] separators = new char[] {';'};
 
-        static System.Media.SoundPlayer click = new System.Media.SoundPlayer(@".\Sounds\click.wav");
+        static System.Media.SoundPlayer click = new System.Media.SoundPlayer(@"click.wav");
 
         static bool gameOver = false;
         static void Main(string[] args)
@@ -32,6 +32,19 @@ namespace Interactive_Fiction
                 currentPageContents = temp.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
                 SplashPage();
+
+                Console.Clear();
+
+                PrintFrame();
+                Console.WriteLine();
+                Console.WriteLine(" You may press Escape at any time during the story to reach the Main Menu.");
+                Console.WriteLine();
+                Console.WriteLine(" Please press any key to continue.");
+                Console.WriteLine();
+                PrintFrame();
+
+                Console.ReadKey(true);
+                click.Play();
 
 
                 // game loop:
@@ -299,7 +312,12 @@ namespace Interactive_Fiction
 
                 PrintFrame();
 
-                Console.WriteLine(" Welcome to the Interactive Fiction Engine! The interactive story you will be enjoying is titled:");
+                Console.Write(" Welcome to the Interactive Fiction Engine v 2.0!");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(" (Now with bookmarks and file reading!)");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine(" The interactive story you will be enjoying is titled:");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(" " + currentPageContents[0]);
@@ -338,7 +356,7 @@ namespace Interactive_Fiction
                         currentPageNumber = int.Parse(savePage);
                         startStory = true;
 
-                        Console.WriteLine("Bookmark Loaded!");
+                        Console.WriteLine("Bookmark Loaded! Press any key to continue.");
 
                         Console.ReadKey(true);
                         click.Play();
@@ -382,7 +400,8 @@ namespace Interactive_Fiction
 
                 PrintFrame();
 
-                Console.WriteLine(" Main Menu:");
+                Console.WriteLine(" Main Menu");
+                Console.WriteLine();
                 Console.WriteLine(" Please choose from the following options:");
                 Console.WriteLine();
                 Console.WriteLine(" (N)ew Game");
@@ -441,7 +460,7 @@ namespace Interactive_Fiction
                             {
                                 savePage = currentPageNumber.ToString();
                                 System.IO.File.WriteAllText(@"savegame.txt", savePage);
-                                Console.WriteLine(" Page " + currentPageNumber + " Bookmarked!");
+                                Console.WriteLine(" Page " + currentPageNumber + " Bookmarked! Press any key to continue.");
 
                                 Console.ReadKey(true);
                                 click.Play();
@@ -460,7 +479,7 @@ namespace Interactive_Fiction
                             System.IO.File.Create(@"savegame.txt").Close();
                             System.IO.File.WriteAllText(@"savegame.txt", savePage);
 
-                            Console.WriteLine(" Page " + currentPageNumber + " Bookmarked!");
+                            Console.WriteLine(" Page " + currentPageNumber + " Bookmarked! Press any key to continue.");
 
                             Console.ReadKey(true);
                             click.Play();
@@ -488,7 +507,7 @@ namespace Interactive_Fiction
                                 currentPageNumber = int.Parse(savesPage);
                                 startStory = true;
 
-                                Console.WriteLine(" Bookmark Loaded!");
+                                Console.WriteLine(" Bookmark Loaded! Press any key to continue.");
 
                                 Console.ReadKey(true);
                                 click.Play();
